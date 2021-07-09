@@ -1,8 +1,11 @@
+import dotenv from "dotenv";
 import fastify from "fastify";
-import { LoggerSingleton } from "./logger";
-import { getPosts } from "./getPosts";
-import { getUsers } from "./getUsers";
-import {PostOrdering} from "./PostOrdering";
+import { LoggerSingleton } from "../logger";
+import { getPosts } from "../getPosts";
+import { getUsers } from "../getUsers";
+import { PostOrdering } from "../PostOrdering";
+
+dotenv.config();
 
 const logger = new LoggerSingleton().getInstance();
 const server = fastify({
@@ -50,4 +53,5 @@ server.get<{ Querystring: { sortBy: string } }>("/users", async (req, res) => {
   res.send(users);
 });
 
-export { server };
+const port = process.env.PORT || "8080";
+server.listen(port);

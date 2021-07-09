@@ -1,5 +1,5 @@
-import { fetchPosts } from "./redditApi";
-import { savePosts } from "./savePosts";
+import { fetchPosts } from "../fetchPosts/redditApi";
+import { savePosts } from "../fetchPosts/savePosts";
 import dotenv from "dotenv";
 import { LoggerSingleton } from "../logger";
 
