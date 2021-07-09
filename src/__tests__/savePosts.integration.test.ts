@@ -1,7 +1,7 @@
 import { sql } from "slonik";
-import { PostgresConnectionPoolSingleton } from "../../db";
-import { Post } from "../../fetchPosts/Posts";
-import { savePosts } from "../../fetchPosts/savePosts";
+import { PostgresConnectionPoolSingleton } from "../db";
+import { Post } from "../Posts";
+import { savePosts } from "../savePosts";
 
 it("Saves posts in Postgres DB", async () => {
   const posts: Post[] = [

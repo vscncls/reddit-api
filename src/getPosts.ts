@@ -1,6 +1,6 @@
 import { sql } from "slonik";
 import { PostgresConnectionPoolSingleton } from "./db";
-import { Post } from "./fetchPosts/Posts";
+import { Post } from "./Posts";
 import { PostDb } from "./PostDb";
 import { PostOrdering } from "./PostOrdering";
 

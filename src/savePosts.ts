@@ -1,5 +1,5 @@
 import { sql } from "slonik";
-import { PostgresConnectionPoolSingleton } from "../db";
+import { PostgresConnectionPoolSingleton } from "./db";
 import { Post } from "./Posts";
 
 export const savePosts = async (posts: Post[]): Promise<void> => {

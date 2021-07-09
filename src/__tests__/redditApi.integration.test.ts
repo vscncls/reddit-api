@@ -1,4 +1,4 @@
-import { fetchPosts } from "../../fetchPosts/redditApi";
+import { fetchPosts } from "../redditApi";
 
 describe("Fetch posts from reddit's API", () => {
   it("Returns all current hot posts", async () => {
