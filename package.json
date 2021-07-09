@@ -6,10 +6,9 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint . && prettier",
-    "compile": "tsc",
-    "server:dev": "ts-node-dev --respawn src/api.ts",
-    "server:run": "node ./dist/api.js",
-    "fetch-posts": "node ./dist/fetchPosts.js"
+    "server:dev": "ts-node-dev --respawn src/entrypoints/fastifyServer.ts | ./node_modules/.bin/pino-pretty",
+    "server:run": "node ./dist/src/entrypoints/fastifyServer.js",
+    "fetch-posts": "node ./dist/src/entrypoints/saveHotRedditPosts.js"
   },
   "repository": {
     "type": "git",
@@ -38,6 +37,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "jest": "^27.0.6",
+    "pino-pretty": "^5.1.1",
     "prettier": "^2.3.2",
     "ts-jest": "^27.0.3",
     "ts-node-dev": "^1.1.8",
