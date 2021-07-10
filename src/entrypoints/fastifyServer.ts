@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import fastify from "fastify";
-import { LoggerSingleton } from "../logger";
-import { getPosts } from "../getPosts";
-import { getUsers } from "../getUsers";
+import { LoggerSingleton } from "../LoggerSingleton";
+import { PostsProvider } from "../PostsProvider";
+import { UsersProvider } from "../UsersProvider";
 import { PostOrdering } from "../PostOrdering";
 
 dotenv.config();
@@ -36,7 +36,8 @@ server.get<{ Querystring: slashPostsParams }>("/posts", async (req, res) => {
     endDate: new Date(req.query.endDate),
   };
 
-  const posts = await getPosts(filters, req.query.sortBy as PostOrdering);
+  const postsProvider = new PostsProvider();
+  const posts = await postsProvider.getPosts(filters, req.query.sortBy as PostOrdering);
 
   res.send(posts);
 });
@@ -48,7 +49,8 @@ server.get<{ Querystring: { sortBy: string } }>("/users", async (req, res) => {
     return;
   }
 
-  const users = await getUsers(req.query.sortBy as PostOrdering);
+  const usersProvider = new UsersProvider();
+  const users = await usersProvider.getUsers(req.query.sortBy as PostOrdering);
 
   res.send(users);
 });

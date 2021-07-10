@@ -1,8 +1,11 @@
-import { fetchPosts } from "../redditApi";
+import { RedditClient } from "../RedditClient";
 
-describe("Fetch posts from reddit's API", () => {
-  it("Returns all current hot posts", async () => {
-    const posts = await fetchPosts("artificial");
+describe("Reddit Client fetches data sucessfully", () => {
+  it("Returns current hot posts from specified subreddit", async () => {
+    const redditClient = new RedditClient();
+
+    const posts = await redditClient.fetchPosts("artificial");
+
     expect(posts).toBeTruthy();
     expect(posts.length).toBeGreaterThan(0);
     posts.forEach((post) => {

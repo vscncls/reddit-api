@@ -1,7 +1,7 @@
 import { sql } from "slonik";
-import { PostgresConnectionPoolSingleton } from "../db";
+import { PostgresConnectionPoolSingleton } from "../PostgresConnectionPoolSingleton";
 import { Post } from "../Posts";
-import { savePosts } from "../savePosts";
+import { PostsProvider } from "../PostsProvider";
 
 it("Saves posts in Postgres DB", async () => {
   const posts: Post[] = [
@@ -20,8 +20,9 @@ it("Saves posts in Postgres DB", async () => {
       commentsCount: 323,
     },
   ];
+  const postsProvider = new PostsProvider();
 
-  await savePosts(posts);
+  await postsProvider.savePosts(posts);
 
   const pool = new PostgresConnectionPoolSingleton().getInstance();
   const savedPosts = await pool.connect(async (connection) => {
