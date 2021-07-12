@@ -28,6 +28,7 @@ node migrate up
 * Fetch data from reddit to local DB
 
 ```
+npx tsc
 npm run fetch-posts
 ```
 
