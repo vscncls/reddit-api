@@ -36,6 +36,7 @@ describe("/posts", () => {
         commentsCount: 323,
       },
     ]);
+
     const response = await fastifyServer.inject({
       method: "GET",
       url: "/posts",
@@ -153,7 +154,7 @@ describe("/posts", () => {
 
     const body = JSON.parse(response.body);
 
-    expect(body.message).toEqual("All params are required");
+    expect(body.message).toEqual("querystring should have required property 'startDate'");
   });
 
   it("Validates sortBy type", async () => {
@@ -164,11 +165,12 @@ describe("/posts", () => {
         sortBy: "invalid",
         startDate: "1970-02-01",
         endDate: "2222-03-01",
-      } as slashPostsParams,
+      },
     });
 
     const body = JSON.parse(response.body);
 
-    expect(body.message).toMatch("Invalid sort type, valid types are UPS,COMMENTS");
+    expect(response.statusCode).toEqual(400);
+    expect(body.message).toMatch('querystring.sortBy should match pattern "^(UPS|COMMENTS)$"');
   });
 });

@@ -110,6 +110,7 @@ describe("/users", () => {
 
     const body = JSON.parse(response.body);
 
-    expect(body.message).toMatch("Invalid sort type, valid types are UPS,COMMENTS");
+    expect(response.statusCode).toEqual(400);
+    expect(body.message).toMatch('querystring.sortBy should match pattern "^(UPS|COMMENTS)$"');
   });
 });
