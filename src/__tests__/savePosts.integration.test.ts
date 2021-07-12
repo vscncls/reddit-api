@@ -9,14 +9,14 @@ it("Saves posts in Postgres DB", async () => {
       title: "title 1",
       author: "author 1",
       upvotes: 132,
-      createdAt: new Date("2021-01-01"),
+      createdAt: new Date("2021-01-01T00:00:00.000Z"),
       commentsCount: 321,
     },
     {
       title: "title 2",
       author: "author 2",
       upvotes: 133,
-      createdAt: new Date("2021-02-02"),
+      createdAt: new Date("2021-02-02T00:00:00.001Z"),
       commentsCount: 323,
     },
   ];
@@ -32,7 +32,6 @@ it("Saves posts in Postgres DB", async () => {
    `);
   });
 
-  expect(savedPosts.rows.length).toBe(2);
   expect(savedPosts.rows).toStrictEqual(posts);
 
   await pool.connect(async (connection) => {

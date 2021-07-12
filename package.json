@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test:unit": "jest -c ./jest.unit.config.js",
+    "test:integration": "node migrate down --to 0 && node migrate up && jest -c ./jest.integration.config.js",
+    "test:e2e": "jest -c ./jest.e2e.config.js",
     "lint": "eslint . && prettier",
-    "server:dev": "ts-node-dev --respawn src/entrypoints/fastifyServer.ts | ./node_modules/.bin/pino-pretty",
+    "server:dev": "ts-node-dev --respawn src/entrypoints/restApi.ts | ./node_modules/.bin/pino-pretty",
     "server:run": "node ./dist/src/entrypoints/fastifyServer.js",
     "fetch-posts": "node ./dist/src/entrypoints/saveHotRedditPosts.js"
   },

@@ -17,7 +17,7 @@ export class PostsProvider {
   public async getPosts(filter: PostFilters, sortBy: PostOrdering): Promise<Post[]> {
     const columnToSortBy = sortBy === "UPS" ? "upvotes" : "commentsCount";
     const result = await this.pool.connect(async (connection) => {
-      return await connection.query<Post & { createdAt: number }>(sql`
+      return await connection.query<Post>(sql`
         SELECT *
         FROM posts
         WHERE "createdAt" BETWEEN ${filter.startDate.toISOString()} AND ${filter.endDate.toISOString()}
@@ -25,10 +25,7 @@ export class PostsProvider {
       `);
     });
 
-    return result.rows.map((postRow) => ({
-      ...postRow,
-      createdAt: new Date(postRow.createdAt),
-    }));
+    return [...result.rows];
   }
 
   public async savePosts(posts: Post[]): Promise<void> {
@@ -39,7 +36,7 @@ export class PostsProvider {
           posts.map((post) => [
             post.title,
             post.author,
-            post.createdAt.toUTCString(),
+            post.createdAt.toISOString(),
             post.upvotes,
             post.commentsCount,
           ]),

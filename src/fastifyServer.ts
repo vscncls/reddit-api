@@ -1,18 +1,15 @@
-import dotenv from "dotenv";
 import fastify from "fastify";
-import { LoggerSingleton } from "../LoggerSingleton";
-import { PostsProvider } from "../PostsProvider";
-import { UsersProvider } from "../UsersProvider";
-import { PostOrdering } from "../PostOrdering";
-
-dotenv.config();
+import { LoggerSingleton } from "./LoggerSingleton";
+import { PostsProvider } from "./PostsProvider";
+import { UsersProvider } from "./UsersProvider";
+import { PostOrdering } from "./PostOrdering";
 
 const logger = new LoggerSingleton().getInstance();
 const server = fastify({
   logger,
 });
 
-type slashPostsParams = {
+export type slashPostsParams = {
   startDate: string;
   endDate: string;
   sortBy: string;
@@ -55,5 +52,4 @@ server.get<{ Querystring: { sortBy: string } }>("/users", async (req, res) => {
   res.send(users);
 });
 
-const port = process.env.PORT || "8080";
-server.listen(port);
+export { server as fastifyServer };
