@@ -19,6 +19,12 @@ cp .env.example .env
 npm i
 ```
 
+* Run migrations
+
+```bash
+node migrate up
+```
+
 * Fetch data from reddit to local DB
 
 ```
