@@ -106,3 +106,11 @@ Example response:
   ...
 ]
 ```
+
+## Tests
+
+Tests are located uneder src/__tests__/ and are classified as: unit, integration or e2e
+
+To run the tests run `npm run tests:unit`, `npm run tests:integration`, `npm run tests:e2e`
+
+Note: to run integration or e2e tests the databse needs to be running
