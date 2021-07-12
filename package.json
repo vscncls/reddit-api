@@ -7,9 +7,9 @@
     "test:unit": "jest -c ./jest.unit.config.js",
     "test:integration": "node migrate down --to 0 && node migrate up && jest -c ./jest.integration.config.js",
     "test:e2e": "jest -c ./jest.e2e.config.js",
-    "lint": "eslint . && prettier",
+    "lint": "eslint src/ && prettier -c src/",
     "server:dev": "ts-node-dev --respawn src/entrypoints/restApi.ts | ./node_modules/.bin/pino-pretty",
-    "server:run": "node ./dist/src/entrypoints/fastifyServer.js",
+    "server:run": "node ./dist/src/entrypoints/restApi.js",
     "fetch-posts": "node ./dist/src/entrypoints/saveHotRedditPosts.js"
   },
   "repository": {

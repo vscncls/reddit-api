@@ -18,4 +18,6 @@ RUN npx tsc
 
 RUN npm prune --production
 
+EXPOSE 8080/tcp
+
 ENTRYPOINT ["npm", "run", "server:run"]
